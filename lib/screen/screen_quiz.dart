@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:myapp2/model/model_quiz.dart';
+import 'package:myapp2/screen/screen_result.dart';
 import 'package:myapp2/widget/candiate_widget.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -76,7 +77,8 @@ class _QuizScreenState extends State<QuizScreen> {
             child: Container(),
           ),
           SingleChildScrollView(
-              child:Column(children: _buildCandidates(width, quiz),
+              child: Column(
+            children: _buildCandidates(width, quiz),
           )),
           Container(
             padding: EdgeInsets.all(width * 0.024),
@@ -97,6 +99,12 @@ class _QuizScreenState extends State<QuizScreen> {
                       ? null
                       : () {
                           if (_currentIndex == widget.quizs.length - 1) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ResultScreen(
+                                        answers: _answers,
+                                        quizs: widget.quizs)));
                           } else {
                             _answerState = [false, false, false, false];
                             _currentIndex += 1;
